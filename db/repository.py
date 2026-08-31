@@ -1,4 +1,5 @@
 from db.database import get_connection
+from core.document import Document
 
 class DatabaseRepository:
     
@@ -17,7 +18,14 @@ class DatabaseRepository:
             VALUES(?,?,?,?,?,?,?,?);
 
         """
-        ,(doc[0],doc[1],doc[2],doc[3],doc[4],doc[5],doc[6],doc[7]))
+        ,(doc.name,
+          doc.path,
+          doc.thumbnail_path,
+          doc.tags,
+          doc.description,
+          doc.upload_date,
+          doc.lecture_date,
+          doc.total_page))
         
         conn.commit()
         

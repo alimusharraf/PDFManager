@@ -15,4 +15,4 @@ class FileManager:
         with open(file_path, "wb") as f:
             f.write(uploaded_document.read())
         
-        return file_path,file_name
+        return file_path
