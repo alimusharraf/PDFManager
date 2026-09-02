@@ -31,3 +31,32 @@ class DatabaseRepository:
         
         cursor.close()
         conn.close()
+        
+    def search_documents(self,tag=None,date=None):
+        conn = get_connection()
+        cursor = conn.cursor()
+        
+        query = "SELECT * FROM Documents"
+        conditions = []
+        params = []
+        
+        if tag:
+            conditions.append("tags LIKE ?")
+            params.append(f"%{tag}%")
+            
+        if date:
+            conditions.append("lecture_date = ?")
+            params.append(date)
+        
+        if conditions:
+            query += " WHERE " + " OR ".join(conditions)
+        
+        cursor.execute(query,params)
+        conn.commit()
+        
+        rows = cursor.fetchall()
+        
+        cursor.close()
+        conn.close()
+        
+        return [Document(*row) for row in rows]

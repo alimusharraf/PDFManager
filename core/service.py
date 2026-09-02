@@ -29,8 +29,11 @@ class DocumentServices:
         # upload date
         upload_date = date.today()
         #save to db
-        doc = Document(file_name,file_path,thumbnail_path,tags,description,upload_date,lecture_date,total_page)
+        doc = Document(None,file_name,file_path,thumbnail_path,tags,description,upload_date,lecture_date,total_page)
         self.dbrepo.add_document(doc)
         
         # convert to image
         self.pdf_reader.convert_pdf_to_images(file_path)
+        
+    def search_documents(self,tag=None,date=None):
+        return self.dbrepo.search_documents(tag,date)

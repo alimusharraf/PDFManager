@@ -1,5 +1,6 @@
 class Document:
-    def __init__(self,name,path,thumbnail_path,tags,description,upload_date,lecture_date,total_page):
+    def __init__(self,id,name,path,thumbnail_path,tags,description,upload_date,lecture_date,total_page):
+        self.id = id
         self.name = name
         self.path = path
         self.thumbnail_path = thumbnail_path
