@@ -37,3 +37,12 @@ class DocumentServices:
         
     def search_documents(self,tag=None,date=None):
         return self.dbrepo.search_documents(tag,date)
+    
+    def add_last_read_page(self,doc_id,last_page):
+        self.dbrepo.add_last_read_page(doc_id,last_page)
+    
+    def get_last_read_page(self,doc_id):
+        return self.dbrepo.get_last_read_page(doc_id)
+    
+    def get_all_documents(self):
+        return self.dbrepo.get_all_documents()

@@ -27,6 +27,21 @@ def init_db():
     """
     )
     
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS last_read(
+            id INTEGER PRIMARY KEY,
+            last_page INTEGER  
+        );      
+    """)
+    
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS app_visit(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            event_type TEXT,
+            timestamp TEXT  
+        );      
+    """)
+    
     conn.commit()
     
     cursor.close()

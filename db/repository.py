@@ -60,3 +60,50 @@ class DatabaseRepository:
         conn.close()
         
         return [Document(*row) for row in rows]
+    
+    def add_last_read_page(self,doc_id,last_page):
+        conn = get_connection()
+        cursor = conn.cursor()
+        
+        cursor.execute("""
+            INSERT INTO last_read (id, last_page)
+            VALUES (?, ?)
+            ON CONFLICT(id) 
+            DO UPDATE SET last_page = excluded.last_page;                           
+        """, (doc_id, last_page))
+        
+        conn.commit()      
+        cursor.close()
+        conn.close()
+        
+    def get_last_read_page(self,doc_id):
+        conn = get_connection()
+        cursor = conn.cursor()
+        
+        cursor.execute("""
+            SELECT last_page FROM last_read
+            WHERE id = ?;                               
+        """,(doc_id,))
+        
+        result = cursor.fetchone()
+        last_page = result[0] if result else None
+            
+        cursor.close()
+        conn.close()
+        return last_page
+    
+    def get_all_documents(self):
+        conn = get_connection()
+        cursor = conn.cursor()
+        
+        cursor.execute("""
+            SELECT * FROM Documents                              
+        """)
+        
+        rows = cursor.fetchall()
+            
+        cursor.close()
+        conn.close()
+        return [Document(*row) for row in rows]
+    
+    

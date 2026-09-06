@@ -1,2 +1,5 @@
 ipykernel
+numpy
+pandas
 streamlit
+python-dotenv
