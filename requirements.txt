@@ -3,3 +3,4 @@ numpy
 pandas
 streamlit
 python-dotenv
+PyMuPDF
